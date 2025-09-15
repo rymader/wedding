@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+    {{ block "title" . }}
+      {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}
+    {{ end }}
+  </title>
+  {{ partial "seo.html" . | safeHTML }}
+  <link rel="stylesheet" href="{{ "css/styles.css" | relURL }}">
+</head>
+<body>
+  {{ $curr := . }}
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
+
+      <!-- Mobile hamburger -->
+      <button class="burger" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Primary nav -->
+      <nav id="primary-nav" class="nav" aria-label="Primary">
+        <div class="nav-links">
+          {{ with site.Menus.main }}
+            {{ range . }}
+              {{ $isActive := or (eq ($.RelPermalink) (.URL | relLangURL)) (eq $.Permalink (.URL | absURL)) }}
+              <a class="link{{ if $isActive }} active{{ end }}" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+            {{ end }}
+          {{ end }}
+        </div>
+
+        <!-- Language dropdown -->
+        <div class="lang">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+            {{ .Site.Language.LanguageName }} ▾
+          </button>
+          <div class="lang-menu" role="menu">
+            {{ range .Sites }}
+              {{ if ne .Language.Lang $.Site.Language.Lang }}
+                <a role="menuitem" href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName }}</a>
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="wrap">
+      {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <small>© {{ now.Year }} {{ .Site.Title }}</small>
+    </div>
+  </footer>
+
+  <script src="{{ "js/site.js" | relURL }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+baseURL = "https://example.netlify.app/"
+title = "Our Wedding"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+
+[params]
+  canva_en_image = "/assets/photos/main_page.png"
+  canva_th_image = "/assets/photos/main_page.png"
+  canva_en = "https://your-en.canva.site/"
+  canva_th = "https://your-th.canva.site/"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[languages]
+
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    contentDir = "content/en"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        name = "Home"
+        url = "/"
+        weight = 1
+      [[languages.en.menu.main]]
+        name = "RSVP"
+        url = "/rsvp/"
+        weight = 3
+      [[languages.en.menu.main]]
+        name = "Details"
+        url = "/details/"
+        weight = 4
+      [[languages.en.menu.main]]
+        name = "Guestbook"
+        url = "/guestbook/"
+        weight = 5
+
+  [languages.th]
+    languageName = "ไทย"
+    weight = 2
+    contentDir = "content/th"
+
+    [languages.th.menu]
+      [[languages.th.menu.main]]
+        name = "หน้าแรก"
+        url = "/"
+        weight = 1
+      [[languages.th.menu.main]]
+        name = "ตอบรับคำเชิญ"
+        url = "/rsvp/"
+        weight = 3
+      [[languages.th.menu.main]]
+        name = "รายละเอียด"
+        url = "/details/"
+        weight = 4
+      [[languages.th.menu.main]]
+        name = "สมุดเยี่ยม"
+        url = "/guestbook/"
+        weight = 5

@@ -1,0 +1,31 @@
+{{- $title := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
+{{- $desc  := or .Params.description .Site.Params.description .Site.Title -}}
+{{- $type  := cond .IsHome "website" "article" -}}
+{{- $url   := .Permalink -}}
+{{- $locale := .Site.Language.Lang -}}
+
+<link rel="canonical" href="{{ $url }}">
+<meta name="description" content="{{ $desc | plainify }}">
+
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc | plainify }}">
+<meta property="og:type" content="{{ $type }}">
+<meta property="og:url" content="{{ $url }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="{{ $locale }}">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc | plainify }}">
+
+{{- with .Params.images }}
+  {{- range first 1 . }}
+    <meta property="og:image" content="{{ . | absURL }}">
+    <meta name="twitter:image" content="{{ . | absURL }}">
+  {{- end }}
+{{- end }}
+
+{{- /* Hreflang alternates for i18n */ -}}
+{{- range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Site.Language.Lang }}" href="{{ .Permalink }}">
+{{- end }}

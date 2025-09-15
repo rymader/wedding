@@ -1,0 +1,33 @@
+# Hugo build output
+/public/
+/resources/
+/hugo_cache/
+
+# Netlify build artifacts
+/.netlify/
+
+# Logs
+*.log
+
+# Node (if you ever add npm tooling)
+/node_modules/
+/package-lock.json
+/yarn.lock
+
+# OS-specific junk
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+# Linux
+*~
+
+# Editor/IDE settings
+.vscode/
+.idea/
+*.swp
