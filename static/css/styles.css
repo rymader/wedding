@@ -149,3 +149,7 @@ body.home .fullscreen-img {
   transform: translateX(-5vw); /* Adjust as needed */
   display: block;
 }
+
+html, body {
+  background: #f5e5d9
+}
