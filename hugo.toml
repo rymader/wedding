@@ -1,4 +1,4 @@
-baseURL = "https://rymader.github.io/wedding/en/"
+baseURL = "https://rymader.github.io/wedding/"
 title = "Our Wedding"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
