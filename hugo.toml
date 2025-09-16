@@ -2,6 +2,8 @@ baseURL = "https://example.netlify.app/"
 title = "Our Wedding"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
+relativeURLs = true
+canonifyURLs = true
 
 [params]
   canva_en_image = "/assets/photos/main_page.png"
