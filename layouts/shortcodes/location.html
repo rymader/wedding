@@ -1,0 +1,8 @@
+{{ $src := default .Site.Params.location_banner (.Get "src") }}
+{{ $alt := default "Wedding location graphic" (.Get "alt") }}
+
+{{ if $src }}
+<div class="location-image">
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async" />
+</div>
+{{ end }}

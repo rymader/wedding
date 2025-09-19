@@ -9,11 +9,12 @@
     {{ end }}
   </title>
   {{ partial "seo.html" . | safeHTML }}
-  <link rel="stylesheet" href="{{ "css/styles.css" | relURL }}">
+
+  {{/* CSS via Hugo Pipes; RelPermalink works with relativeURLs=true and baseURL=/wedding/ */}}
+  {{ $css := resources.Get "css/styles.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
 <body>
-  {{ $curr := . }}
-
   <header class="site-header">
     <div class="wrap header-row">
       <a class="brand" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
@@ -63,6 +64,8 @@
     </div>
   </footer>
 
-  <script src="{{ "js/site.js" | relURL }}" defer></script>
+  {{/* JS: keep static or pipe it too. Piping avoids relative path issues. */}}
+  {{ $js := resources.Get "js/site.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $js.RelPermalink }}" defer></script>
 </body>
 </html>

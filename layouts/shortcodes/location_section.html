@@ -1,0 +1,30 @@
+{{/* Minimal, safe version */}}
+
+{{ $banner := or (.Get "banner") .Site.Params.location_banner }}
+{{ $map    := or (.Get "map")    .Site.Params.location_map }}
+{{ $alt    := default "Wedding location graphic" (.Get "alt") }}
+{{ $title  := default "Crowne Plaza Bangkok Lumpini Park" (.Get "title") }}
+
+{{/* Make local banner path work under subpath; keep http(s) as-is */}}
+{{ $isRemote := or (hasPrefix $banner "http://") (hasPrefix $banner "https://") }}
+{{ $bannerURL := cond $isRemote $banner ($banner | relURL) }}
+
+<div class="location-section">
+  {{ with $banner }}
+  <div class="location-image">
+    <img src="{{ $bannerURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  </div>
+  {{ end }}
+
+  {{ with $map }}
+  <div class="location-map">
+    <iframe
+      title="{{ $title }}"
+      src="{{ . }}"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+  {{ end }}
+</div>

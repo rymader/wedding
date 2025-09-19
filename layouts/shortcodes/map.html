@@ -1,0 +1,14 @@
+{{ $src := default .Site.Params.location_map (.Get "src") }}
+{{ $title := default "Crowne Plaza Bangkok Lumpini Park" (.Get "title") }}
+
+{{ if $src }}
+<div class="location-map">
+  <iframe
+    title="{{ $title }}"
+    src="{{ $src }}"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+{{ end }}

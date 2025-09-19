@@ -1,4 +1,4 @@
 ---
 title: "Welcome"
 ---
-{{< canva >}}
+{{< main_page >}}
