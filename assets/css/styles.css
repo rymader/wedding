@@ -40,10 +40,27 @@ a{color:inherit;text-decoration:none}
 }
 .header-row{display:flex;align-items:center;gap:1rem;padding:.9rem var(--gap)}
 
-.brand{
-  font-weight:900; letter-spacing:.25px; line-height:1;
-  color:var(--rose-dark);
-  padding:.25rem .5rem; border-radius:.5rem; white-space:nowrap;
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: 'Dancing Script', cursive, "Noto Sans Thai", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  color: #ae0107;
+  white-space: nowrap;
+}
+
+.brand-logo {
+  height: clamp(6rem, 14vw, 10rem); /* bigger: ~96–160px depending on screen */
+  width: auto;
+  margin-left: 1.25rem;             /* push it right */
+  background: #fff;                 /* force white badge background */
+  padding: .4rem;                   /* breathing room around logo */
+  border-radius: 1rem;              /* rounded badge corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,.15); /* subtle frame/shadow */
+  display: block;
 }
 
 .nav{

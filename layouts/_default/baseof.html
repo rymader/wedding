@@ -10,7 +10,7 @@
     {{ end }}
   </title>
   {{ partial "seo.html" . | safeHTML }}
-
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
   {{/* CSS via Hugo Pipes (works with baseURL=/wedding/ and relativeURLs=false) */}}
   {{ $css := resources.Get "css/styles.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
@@ -19,7 +19,12 @@
 <body>
   <header class="site-header">
     <div class="wrap header-row">
-      <a class="brand" href="{{ " /" | relLangURL }}">{{ .Site.Title }}</a>
+      <a class="brand" href="{{ " /" | relLangURL }}">
+        <span class="brand-text">{{ .Site.Title }}</span>
+        {{ with .Site.Params.logo }}
+        <img class="brand-logo" src="{{ . | relURL }}" alt="Logo">
+        {{ end }}
+      </a>
 
       <!-- Mobile hamburger -->
       <button class="burger" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu" type="button">
