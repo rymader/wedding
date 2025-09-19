@@ -1,0 +1,16 @@
+{{/* Renders a full-width schedule image that aligns with the location section.
+     Use: {{< schedule_banner >}} or {{< schedule_banner src="/path/to/img.png" alt="..." >}}
+*/}}
+
+{{ $src := or (.Get "src") .Site.Params.schedule_banner }}
+{{ $alt := or (.Get "alt") "Schedule of Ceremony" }}
+
+{{ if $src }}
+  {{/* Make local paths work under subpath; keep http(s) as-is */}}
+  {{ $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") }}
+  {{ $url := cond $isRemote $src ($src | relURL) }}
+
+  <div class="schedule-row">
+    <img class="schedule-img" src="{{ $url }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  </div>
+{{ end }}

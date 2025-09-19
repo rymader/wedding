@@ -14,7 +14,16 @@
 html,body{margin:0;padding:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gap)}
-.site-main{flex: 1 0 auto; padding:0 !important; height: calc(100vh - 80px); min-height:0; display:flex; align-items:center; justify-content:flex-start; background: var(--blush);}
+
+/* Unified main container (applies to ALL pages) */
+.site-main{
+  padding: 1rem 0;                  /* top/bottom breathing room everywhere */
+  display: block;
+  height: auto;                     /* allow content to grow */
+  min-height: calc(100vh - 80px);   /* baseline fill similar to old fixed height */
+  background: var(--blush);
+}
+
 .site-footer{border-top:1px solid var(--ring);background:#fff}
 .site-footer .wrap{padding:1rem var(--gap);color:var(--muted)}
 
@@ -113,31 +122,10 @@ a{color:inherit;text-decoration:none}
 .canva-wrapper{max-width:100%;text-align:center;margin:2rem auto;margin-top: 1rem;}
 .canva-image{width:100%;height:auto;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 
-/* ===== Fullscreen image styles ===== */
+/* ===== Fullscreen image (generic helper if ever used) ===== */
 .fullscreen-img { display:block; max-width:100%; height:auto; margin:0 auto; }
 
-/* Only apply these styles on the homepage */
-body.home .site-main {
-  padding: 0 !important;
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  height: 100vh; min-height: 100vh;
-  width: 100vw; max-width: 100vw;
-  overflow-x: auto;
-  background: var(--blush);
-}
-body.home .fullscreen-img {
-  height: 100vh; width: auto; max-width: none; max-height: 100vh;
-  object-fit: contain; background: var(--blush);
-  transform: translateX(-5vw); display: block;
-}
-
-/* Global background */
-html, body { background: #f5e5d9 }
-
 /* ===== LOCATION (ALWAYS TWO COLUMNS) — FINAL ===== */
-/* Details: equal-height columns, bigger, shifted left */
 .location-section{
   --locH: clamp(517px, 67vh, 803px);   /* shared height for BOTH columns */
   display:grid;
@@ -145,46 +133,42 @@ html, body { background: #f5e5d9 }
   gap:1rem;
   width:min(1720px,110vw);
   margin:1rem auto;
-  margin-top: 1rem;    /* instead of 2rem */
   margin-left:-15vw;                   /* shift left (tweak as needed) */
-  align-items:stretch;                 /* force equal heights */
+  align-items:stretch;                 /* equal heights */
 }
 
 .location-image{ height:var(--locH); display:flex; }
 .location-image img{
   width:100%;
   height:100%;
-  object-fit:contain;    /* show whole image */
-  background:transparent;
-  border-radius:0;
-  box-shadow:none;
+  object-fit:contain; background:transparent; border-radius:0; box-shadow:none;
 }
 
 .location-map{
-  position:relative;
-  width:100%;
-  height:var(--locH);    /* EXACTLY the same height as the image column */
-  overflow:hidden;
-  border:0;
-  border-radius:0;
-  box-shadow:none;
+  position:relative; width:100%; height:var(--locH); overflow:hidden; border:0; border-radius:0; box-shadow:none;
 }
-.location-map iframe{
-  display:block;
-  width:100%;
-  height:100%;
-  border:0;
-}
+.location-map iframe{ display:block; width:100%; height:100%; border:0; }
 
 @media (max-width: 980px){
   .location-section{
-    grid-template-columns:1fr;   /* stack vertically */
-    margin-left:0;
-    width:96vw;
-    --locH:auto;                 /* release fixed equal height */
-    gap:1.25rem;
+    grid-template-columns:1fr; margin-left:0; width:96vw; --locH:auto; gap:1.25rem;
   }
   .location-image{ height:auto; }
   .location-image img{ height:auto; object-fit:contain; }
   .location-map{ height:auto; }
 }
+
+/* ===== SCHEDULE (aligned to LOCATION) ===== */
+.schedule-row{
+  width:min(1720px,110vw);
+  margin:1rem auto 0;
+  margin-left:-15vw;         /* match .location-section left shift */
+}
+.schedule-img{ display:block; width:100%; height:auto; object-fit:contain; }
+
+@media (max-width:980px){
+  .schedule-row{ width:96vw; margin-left:0; }
+}
+
+/* Global background */
+html, body { background: #f5e5d9 }

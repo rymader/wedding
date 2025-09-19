@@ -1,4 +1,7 @@
 {{ define "title" }}{{ .Site.Title }}{{ end }}
+
 {{ define "main" }}
-  <img src="{{ .Site.Params.main_page_hero | absURL }}" alt="Wedding Design" class="canva-image">
+  <div class="wrap">
+    <img src="{{ .Site.Params.main_page_hero | absURL }}" alt="Wedding Design" class="canva-image">
+  </div>
 {{ end }}

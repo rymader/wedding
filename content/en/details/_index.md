@@ -2,4 +2,4 @@
 ---
 
 {{< location_section title="Crowne Plaza Bangkok Lumpini Park" >}}
-
+{{< schedule >}}
