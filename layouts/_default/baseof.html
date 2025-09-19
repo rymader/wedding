@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>
     {{ block "title" . }}
-      {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}
+    {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}
     {{ end }}
   </title>
   {{ partial "seo.html" . | safeHTML }}
@@ -14,10 +15,11 @@
   {{ $css := resources.Get "css/styles.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
+
 <body>
   <header class="site-header">
     <div class="wrap header-row">
-      <a class="brand" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
+      <a class="brand" href="{{ " /" | relLangURL }}">{{ .Site.Title }}</a>
 
       <!-- Mobile hamburger -->
       <button class="burger" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu" type="button">
@@ -28,29 +30,23 @@
       <nav id="primary-nav" class="nav" aria-label="Primary">
         <div class="nav-links">
           {{ with site.Menus.main }}
-            {{ range . }}
-              {{ $isActive := or (eq ($.RelPermalink) (.URL | relLangURL)) (eq $.Permalink (.URL | absURL)) }}
-              <a class="link{{ if $isActive }} active{{ end }}" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
-            {{ end }}
+          {{ range . }}
+          {{ $isActive := or (eq ($.RelPermalink) (.URL | relLangURL)) (eq $.Permalink (.URL | absURL)) }}
+          <a class="link{{ if $isActive }} active{{ end }}" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+          {{ end }}
           {{ end }}
         </div>
 
         <!-- Language dropdown -->
         <div class="lang">
-          <button
-            class="lang-btn"
-            type="button"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="lang-menu"
-          >
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
             {{ .Site.Language.LanguageName }} ▾
           </button>
           <div id="lang-menu" class="lang-menu" role="menu">
             {{ range .Sites }}
-              {{ if ne .Language.Lang $.Site.Language.Lang }}
-                <a role="menuitem" href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName }}</a>
-              {{ end }}
+            {{ if ne .Language.Lang $.Site.Language.Lang }}
+            <a role="menuitem" href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName }}</a>
+            {{ end }}
             {{ end }}
           </div>
         </div>
@@ -65,13 +61,12 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">
-      <small>© {{ now.Year }} {{ .Site.Title }}</small>
-    </div>
+    <div class="wrap"></div>
   </footer>
 
   {{/* JS via Hugo Pipes */}}
   {{ $js := resources.Get "js/site.js" | resources.Minify | resources.Fingerprint }}
   <script src="{{ $js.RelPermalink }}" defer></script>
 </body>
+
 </html>

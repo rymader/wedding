@@ -1,5 +1,4 @@
 baseURL = "https://rymader.github.io/wedding/"
-title = "Our Wedding"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 relativeURLs = false
@@ -22,6 +21,7 @@ canonifyURLs = true
     languageName = "English"
     weight = 1
     contentDir = "content/en"
+    title = "Ann and Ryan"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
@@ -45,6 +45,7 @@ canonifyURLs = true
     languageName = "ไทย"
     weight = 2
     contentDir = "content/th"
+    title = "แอน และ ไรอัน"
 
     [languages.th.menu]
       [[languages.th.menu.main]]
