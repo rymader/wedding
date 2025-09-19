@@ -1,35 +1,27 @@
-/* ===== Invite palette (replace with your exact hex) ===== */
+/* ===== Palette / Layout Vars ===== */
 :root{
-  --rose:       #b63a3a;   /* TODO: exact rose */
-  --rose-dark:  #8f2a2c;   /* TODO: darker rose */
-  --gold:       #c8a24a;   /* TODO: soft gold */
-  --blush:      #fff4f1;   /* TODO: blush background */
+  --rose:       #b63a3a;
+  --rose-dark:  #8f2a2c;
+  --gold:       #c8a24a;
+  --blush:      #fff4f1;
 
   --ink:#2a2323; --muted:#7b6b6b; --ring:#e6d7d2; --hover:#f7efee;
-  --radius:.8rem;
-  --maxw: clamp(1800px, 94vw, 1600px); /* wider cap for large screens */
-  --gap:1.25rem;
+  --radius:.8rem; --gap:1.25rem;
+
+  /* Site width cap */
+  --maxw: clamp(1200px, 94vw, 1600px);
+
+  /* Header height — tweak this to tune the bar & logo height together */
+  --header-h: 64px;
 }
 
 /* ===== Base ===== */
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+html,body{margin:0;padding:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#f5e5d9}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gap)}
 
-/* Unified main container (applies to ALL pages) */
-.site-main{
-  padding: 1rem 0;
-  display: block;
-  height: auto;
-  min-height: calc(100vh - 80px);
-  background: var(--blush);
-}
-
-.site-footer{border-top:1px solid var(--ring);background:#fff}
-.site-footer .wrap{padding:1rem var(--gap);color:var(--muted)}
-
-/* ===== Full-bleed, sticky header ===== */
+/* ===== Header (restored) ===== */
 .site-header{
   position:sticky; top:0; z-index:50; width:100%;
   background:linear-gradient(180deg, var(--blush) 0%, #ffffff 75%);
@@ -38,59 +30,71 @@ a{color:inherit;text-decoration:none}
   -webkit-backdrop-filter:saturate(140%) blur(6px);
   backdrop-filter:saturate(140%) blur(6px);
 }
-.header-row{display:flex;align-items:center;gap:1rem;padding:.9rem var(--gap)}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  font-family: 'Dancing Script', cursive, "Noto Sans Thai", sans-serif;
-  font-weight: 600;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.1;
-  color: #ae0107;
-  white-space: nowrap;
+.header-row{
+  display:flex; align-items:center; gap:1rem;
+  padding:.9rem var(--gap);
+  min-height: var(--header-h); /* lock bar height */
 }
 
-.brand-logo {
-  height: clamp(6rem, 14vw, 10rem); /* bigger: ~96–160px depending on screen */
+.brand{ display:inline-block; text-decoration:none; }
+
+/* Logo: fills bar height, width auto, does not affect bar */
+/* Logo scales larger than the bar, bar height unchanged */
+/* Logo-only adjustments */
+/* Make the transparent logo visually fill the bar height (no layout changes) */
+.brand-logo{
+  /* grow the image to include the header padding area */
+  height: calc(var(--header-h) + 6.5rem); /* 1.8rem = .9rem top + .9rem bottom */
   width: auto;
-  margin-left: 1.25rem;             /* push it right */
-  background: #fff;                 /* force white badge background */
-  padding: .4rem;                   /* breathing room around logo */
-  border-radius: 1rem;              /* rounded badge corners */
-  box-shadow: 0 2px 8px rgba(0,0,0,.15); /* subtle frame/shadow */
   display: block;
+
+  /* cancel the header's vertical padding so the logo reaches the bar edges */
+  margin-top: -2rem;
+  margin-bottom: -2.5rem;
+
+  /* keep it clean for a transparent PNG */
+  background: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
+/* Burger (mobile) */
+/* Burger (mobile) */
+.burger{
+  display:none; margin-left:auto; width:44px;height:36px;border-radius:.6rem;
+  border:1px solid var(--ring); background:#fff; cursor:pointer;
+  align-items:center; justify-content:center; gap:4px;
+  flex-direction: column;
+}
+.burger span{ display:block; width:18px; height:2px; background:var(--ink) }
+
+/* Nav */
 .nav{
   margin-left:auto;
   display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem;
   min-width:55%;
 }
 .nav-links{display:flex;justify-content:center;align-items:center;gap:.35rem;flex-wrap:wrap}
-
 .link{
   padding:.55rem .95rem; border-radius:999px; font-weight:600; letter-spacing:.3px;
   border:1px solid transparent; transition:background .15s,border-color .15s,color .15s, box-shadow .15s;
 }
 .link:hover{ background:var(--hover); border-color:var(--ring) }
 .link.active{
-  color:#fff;
-  background:linear-gradient(180deg, var(--rose), var(--rose-dark));
-  box-shadow:0 6px 18px rgba(0,0,0,.15);
-  border-color:transparent;
+  color:#fff; background:linear-gradient(180deg, var(--rose), var(--rose-dark));
+  box-shadow:0 6px 18px rgba(0,0,0,.15); border-color:transparent;
 }
 
-/* Language dropdown */
+/* Language dropdown (unchanged) */
 .lang{ position:relative }
 .lang-btn{
   border:1px solid var(--ring); background:#fff; color:var(--ink);
   padding:.45rem .8rem; border-radius:.7rem; cursor:pointer; font:inherit;
 }
 .lang-menu{
-  position:absolute; top:calc(100% + .4rem); right:0; min-width:160px;
-  z-index:1000;
+  position:absolute; top:calc(100% + .4rem); right:0; min-width:160px; z-index:1000;
   background:#fff; border:1px solid var(--ring); border-radius:.7rem;
   box-shadow:0 14px 30px rgba(0,0,0,.08); display:none; overflow:hidden;
 }
@@ -99,13 +103,6 @@ a{color:inherit;text-decoration:none}
 .lang.open .lang-menu{ display:block }
 
 /* Mobile nav */
-.burger{
-  display:none; margin-left:auto; width:44px;height:36px;border-radius:.6rem;
-  border:1px solid var(--ring); background:#fff; cursor:pointer;
-  align-items:center; justify-content:center; gap:4px;
-}
-.burger span{ display:block; width:18px; height:2px; background:var(--ink) }
-
 @media (max-width:920px){
   .nav{ display:none }
   .burger{ display:inline-flex }
@@ -121,6 +118,14 @@ a{color:inherit;text-decoration:none}
   .nav.open .lang-menu{ position:static; width:100%; box-shadow:none; border:1px solid var(--ring); }
 }
 
+/* ===== Main ===== */
+.site-main{
+  padding: 1rem 0;
+  display:block; height:auto;
+  min-height: calc(100vh - var(--header-h));
+  background: var(--blush);
+}
+
 /* ===== Slideshow ===== */
 .slideshow{position:relative;max-width:var(--maxw);margin:2rem auto;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:1rem}
 .slides{display:grid;grid-auto-flow:column;grid-auto-columns:100%;height:100%;transition:transform 400ms ease}
@@ -132,28 +137,20 @@ a{color:inherit;text-decoration:none}
 .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.5);border:none;cursor:pointer}
 .dot[aria-current="true"]{background:#fff}
 
-/* ===== Canva wrapper ===== */
+/* ===== Canva image ===== */
 .canva-wrapper{max-width:100%;text-align:center;margin:2rem auto;margin-top:1rem;}
 .canva-image{width:100%;height:auto;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 
-/* ===== Fullscreen image helper ===== */
-.fullscreen-img { display:block; max-width:100%; height:auto; margin:0 auto; }
-
-/* ===== LOCATION (inside wrap, two columns) ===== */
+/* ===== Location section (inside wrap) ===== */
 .location-section{
   --locH: clamp(520px, 67vh, 820px);
-  display:grid;
-  grid-template-columns:minmax(0,2.1fr) minmax(420px,1fr);
-  gap:1rem;
-  width:100%;
-  margin:1rem 0;
-  align-items:stretch;
+  display:grid; grid-template-columns:minmax(0,2.1fr) minmax(420px,1fr);
+  gap:1rem; width:100%; margin:1rem 0; align-items:stretch;
 }
 .location-image{ height:var(--locH); display:flex; }
 .location-image img{ width:100%; height:100%; object-fit:contain; }
 .location-map{ position:relative; width:100%; height:var(--locH); overflow:hidden; border:0; }
 .location-map iframe{ display:block; width:100%; height:100%; border:0; }
-
 @media (max-width:980px){
   .location-section{ grid-template-columns:1fr; --locH:auto; gap:1.25rem; }
   .location-image{ height:auto; }
@@ -161,12 +158,10 @@ a{color:inherit;text-decoration:none}
   .location-map{ height:auto; }
 }
 
-/* ===== SCHEDULE (inside wrap, aligned) ===== */
-.schedule-row{
-  width:100%;
-  margin:1rem 0 0;
-}
+/* ===== Schedule (inside wrap) ===== */
+.schedule-row{ width:100%; margin:1rem 0 0; }
 .schedule-img{ display:block; width:100%; height:auto; object-fit:contain; }
 
-/* Global background */
-html, body { background:#f5e5d9 }
+/* ===== Footer ===== */
+.site-footer{border-top:1px solid var(--ring);background:#fff}
+.site-footer .wrap{padding:1rem var(--gap);color:var(--muted)}

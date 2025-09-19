@@ -19,8 +19,7 @@
 <body>
   <header class="site-header">
     <div class="wrap header-row">
-      <a class="brand" href="{{ " /" | relLangURL }}">
-        <span class="brand-text">{{ .Site.Title }}</span>
+      <a class="brand" href="{{ "/" | relLangURL }}">
         {{ with .Site.Params.logo }}
         <img class="brand-logo" src="{{ . | relURL }}" alt="Logo">
         {{ end }}
