@@ -10,7 +10,7 @@
   </title>
   {{ partial "seo.html" . | safeHTML }}
 
-  {{/* CSS via Hugo Pipes; RelPermalink works with relativeURLs=true and baseURL=/wedding/ */}}
+  {{/* CSS via Hugo Pipes (works with baseURL=/wedding/ and relativeURLs=false) */}}
   {{ $css := resources.Get "css/styles.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 </head>
@@ -20,7 +20,7 @@
       <a class="brand" href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a>
 
       <!-- Mobile hamburger -->
-      <button class="burger" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu">
+      <button class="burger" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle menu" type="button">
         <span></span><span></span><span></span>
       </button>
 
@@ -37,10 +37,16 @@
 
         <!-- Language dropdown -->
         <div class="lang">
-          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+          <button
+            class="lang-btn"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="lang-menu"
+          >
             {{ .Site.Language.LanguageName }} ▾
           </button>
-          <div class="lang-menu" role="menu">
+          <div id="lang-menu" class="lang-menu" role="menu">
             {{ range .Sites }}
               {{ if ne .Language.Lang $.Site.Language.Lang }}
                 <a role="menuitem" href="{{ .Home.RelPermalink }}">{{ .Language.LanguageName }}</a>
@@ -64,7 +70,7 @@
     </div>
   </footer>
 
-  {{/* JS: keep static or pipe it too. Piping avoids relative path issues. */}}
+  {{/* JS via Hugo Pipes */}}
   {{ $js := resources.Get "js/site.js" | resources.Minify | resources.Fingerprint }}
   <script src="{{ $js.RelPermalink }}" defer></script>
 </body>
