@@ -21,7 +21,7 @@ html,body{margin:0;padding:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Robo
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gap)}
 
-/* ===== Header (restored) ===== */
+/* ===== Header ===== */
 .site-header{
   position:sticky; top:0; z-index:50; width:100%;
   background:linear-gradient(180deg, var(--blush) 0%, #ffffff 75%);
@@ -29,6 +29,8 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 10px 24px rgba(0,0,0,.06);
   -webkit-backdrop-filter:saturate(140%) blur(6px);
   backdrop-filter:saturate(140%) blur(6px);
+  /* IMPORTANT: do NOT hide overflow on mobile — it clips the menu */
+  overflow: visible;
 }
 .header-row{
   display:flex; align-items:center; gap:1rem;
@@ -38,29 +40,16 @@ a{color:inherit;text-decoration:none}
 
 .brand{ display:inline-block; text-decoration:none; }
 
-/* Logo: fills bar height, width auto, does not affect bar */
-/* Logo scales larger than the bar, bar height unchanged */
-/* Logo-only adjustments */
-/* Make the transparent logo visually fill the bar height (no layout changes) */
+/* Logo: desktop large, mobile fits the bar */
 .brand-logo{
-  /* grow the image to include the header padding area */
-  height: calc(var(--header-h) + 6.5rem); /* 1.8rem = .9rem top + .9rem bottom */
+  height: calc(var(--header-h) + 6.5rem);
   width: auto;
   display: block;
-
-  /* cancel the header's vertical padding so the logo reaches the bar edges */
   margin-top: -2rem;
   margin-bottom: -2.5rem;
-
-  /* keep it clean for a transparent PNG */
-  background: none;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
+  background: none; padding: 0; border: 0; border-radius: 0; box-shadow: none;
 }
 
-/* Burger (mobile) */
 /* Burger (mobile) */
 .burger{
   display:none; margin-left:auto; width:44px;height:36px;border-radius:.6rem;
@@ -70,7 +59,7 @@ a{color:inherit;text-decoration:none}
 }
 .burger span{ display:block; width:18px; height:2px; background:var(--ink) }
 
-/* Nav */
+/* Nav (desktop) */
 .nav{
   margin-left:auto;
   display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem;
@@ -87,7 +76,7 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 6px 18px rgba(0,0,0,.15); border-color:transparent;
 }
 
-/* Language dropdown (unchanged) */
+/* Language dropdown */
 .lang{ position:relative }
 .lang-btn{
   border:1px solid var(--ring); background:#fff; color:var(--ink);
@@ -102,20 +91,40 @@ a{color:inherit;text-decoration:none}
 .lang-menu a:hover{ background:#faf5f4 }
 .lang.open .lang-menu{ display:block }
 
-/* Mobile nav */
+/* ===== Mobile nav ===== */
 @media (max-width:920px){
   .nav{ display:none }
   .burger{ display:inline-flex }
+
+  /* Open panel fills the viewport below the header and can scroll */
   .nav.open{
-    display:block; position:fixed; left:0; right:0; top:64px; background:#fff;
-    border-top:1px solid var(--ring); padding:.5rem var(--gap) 1rem;
+    display:block;
+    position:fixed;
+    left:0; right:0;
+    top: var(--header-h);  /* align exactly under the bar */
+    bottom:0;              /* anchor to bottom of screen */
+    z-index: 60;           /* above header (header is z-index:50) */
+    background:#fff;
+    border-top:1px solid var(--ring);
+    padding:.5rem var(--gap) 1rem;
     box-shadow:0 16px 32px rgba(0,0,0,.08);
+
+    overflow:auto;                 /* allow internal scrolling */
+    -webkit-overflow-scrolling:touch;
   }
+
   .nav.open .nav-links{ display:grid; gap:.5rem; justify-content:stretch }
   .nav.open .link{ display:block; text-align:center }
   .nav.open .lang{ margin-top:.5rem; display:flex; justify-content:center; width:100% }
   .nav.open .lang-btn{ width:100% }
   .nav.open .lang-menu{ position:static; width:100%; box-shadow:none; border:1px solid var(--ring); }
+
+  /* Mobile-only logo fix: fit the bar, no clipping needed */
+  .brand-logo{
+    height: var(--header-h);
+    max-height: var(--header-h);
+    margin: 0;
+  }
 }
 
 /* ===== Main ===== */
