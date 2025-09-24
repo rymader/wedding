@@ -1,7 +1,9 @@
 {{ define "title" }}{{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-  <div class="wrap">
-    <img src="{{ .Site.Params.main_page_hero | absURL }}" alt="Wedding Design" class="canva-image">
-  </div>
+  <main class="site-main">
+    <div class="wrap">
+      {{ partial "main_page.html" . }}
+    </div>
+  </main>
 {{ end }}

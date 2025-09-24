@@ -1,0 +1,10 @@
+{{ $pt1 := .Site.Params.love_journey }}
+{{ $pt2 := .Site.Params.love_journey_pt2 }}
+
+<div class="canva-wrapper">
+  <img src="{{ $pt1 | relURL }}" alt="Our Love Journey" class="canva-image">
+</div>
+
+<div class="canva-wrapper">
+  <img src="{{ $pt2| relURL }}" alt="Our Love Journey Part 2" class="canva-image">
+</div>

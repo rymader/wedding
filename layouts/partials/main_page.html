@@ -1,0 +1,10 @@
+{{ $hero := .Site.Params.main_page_hero }}
+{{ $married := .Site.Params.we_are_getting_married }}
+
+<div class="canva-wrapper">
+  <img src="{{ $hero | relURL }}" alt="Wedding Design" class="canva-image">
+</div>
+
+<div class="canva-wrapper">
+  <img src="{{ $married | relURL }}" alt="We are Getting Married" class="canva-image">
+</div>

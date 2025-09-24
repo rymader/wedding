@@ -13,7 +13,7 @@
   --gap: 1.25rem;
 
   /* Site width cap */
-  --maxw: clamp(1200px, 94vw, 1600px);
+  --maxw: clamp(960px, 94vw, 1600px);
 
   /* Header height — tweak this to tune the bar & logo height together */
   --header-h: 64px;
