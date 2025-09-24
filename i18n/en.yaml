@@ -1,0 +1,41 @@
+- id: rsvp_title
+  translation: "RSVP"
+
+- id: guest_name_label
+  translation: "Guest name"
+
+- id: will_you_attend
+  translation: "Will you attend?"
+
+- id: "yes"
+  translation: "Yes"
+
+- id: "no"
+  translation: "No"
+
+- id: guest_count_label
+  translation: "Number of guests attending"
+
+- id: choose
+  translation: "Choose..."
+
+- id: email_label
+  translation: "Email"
+
+- id: phone_optional_label
+  translation: "Phone (optional)"
+
+- id: notes_optional_label
+  translation: "Notes (optional)"
+
+- id: notes_placeholder
+  translation: "Dietary needs, accessibility, etc."
+
+- id: submit
+  translation: "Submit"
+
+- id: after_submit_note
+  translation: "You’ll see a confirmation after submitting. We’ll also follow up by email if needed."
+
+- id: noscript_note
+  translation: "Note: With JavaScript disabled, all fields are visible."

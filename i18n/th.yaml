@@ -1,0 +1,41 @@
+- id: rsvp_title
+  translation: "ตอบรับคำเชิญ"
+
+- id: guest_name_label
+  translation: "ชื่อผู้รับเชิญ"
+
+- id: will_you_attend
+  translation: "จะมาร่วมงานหรือไม่?"
+
+- id: "yes"
+  translation: "มา"
+
+- id: "no"
+  translation: "ไม่มา"
+
+- id: guest_count_label
+  translation: "จำนวนผู้เข้าร่วม"
+
+- id: choose
+  translation: "โปรดเลือก..."
+
+- id: email_label
+  translation: "อีเมล"
+
+- id: phone_optional_label
+  translation: "โทรศัพท์ (ไม่บังคับ)"
+
+- id: notes_optional_label
+  translation: "บันทึกเพิ่มเติม (ไม่บังคับ)"
+
+- id: notes_placeholder
+  translation: "ข้อจำกัดอาหาร การแพ้อาหาร หรือสิ่งอำนวยความสะดวก ฯลฯ"
+
+- id: submit
+  translation: "ส่ง"
+
+- id: after_submit_note
+  translation: "หลังส่งแบบฟอร์ม คุณจะเห็นข้อความยืนยันบนเว็บไซต์ และเราจะติดต่อกลับทางอีเมลหากจำเป็น"
+
+- id: noscript_note
+  translation: "หมายเหตุ: หากปิดการใช้งาน JavaScript ฟิลด์ทั้งหมดจะแสดงให้เห็น"

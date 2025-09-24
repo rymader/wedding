@@ -1,0 +1,84 @@
+<!-- RSVP Form (Netlify) -->
+<section class="rsvp-section">
+  <h2 class="rsvp-title">{{ i18n "rsvp_title" }}</h2>
+
+  <form
+    name="RSVP"
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+    class="rsvp-form"
+  >
+    <!-- Netlify required -->
+    <input type="hidden" name="form-name" value="RSVP">
+    <input type="hidden" name="page" value="{{ .Page.Permalink }}">
+    <input type="hidden" name="lang" value="{{ .Site.Language.Lang }}">
+    <p class="hidden"><label>Don’t fill this out: <input name="bot-field"></label></p>
+
+    <!-- Guest name -->
+    <div class="field">
+      <label for="guest-name">{{ i18n "guest_name_label" }}<span aria-hidden="true">*</span></label>
+      <input id="guest-name" name="guest_name" type="text" required autocomplete="name">
+    </div>
+
+    <!-- Attending? -->
+    <fieldset class="field">
+      <legend>{{ i18n "will_you_attend" }}<span aria-hidden="true">*</span></legend>
+      <div class="choices">
+        <label class="choice">
+          <input type="radio" name="attending" id="attending-yes" value="{{ i18n "yes" }}" required>
+          {{ i18n "yes" }}
+        </label>
+        <label class="choice">
+          <input type="radio" name="attending" id="attending-no" value="{{ i18n "no" }}" required>
+          {{ i18n "no" }}
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Shown only when "Yes" -->
+    <div id="attending-extra" class="attending-extra hidden" aria-hidden="true">
+      <div class="field">
+        <label for="guest-count">{{ i18n "guest_count_label" }}<span aria-hidden="true">*</span></label>
+        <select id="guest-count" name="guest_count">
+          <option value="" selected disabled>{{ i18n "choose" }}</option>
+          <option>1</option><option>2</option><option>3</option>
+          <option>4</option><option>5</option><option>6</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="email">{{ i18n "email_label" }}<span aria-hidden="true">*</span></label>
+        <input id="email" name="email" type="email" autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="phone">{{ i18n "phone_optional_label" }}</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel">
+      </div>
+
+      <div class="field">
+        <label for="notes">{{ i18n "notes_optional_label" }}</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="{{ i18n "notes_placeholder" }}"></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn-primary">{{ i18n "submit" }}</button>
+    </div>
+
+    <p class="small-muted">
+      {{ i18n "after_submit_note" }}
+    </p>
+
+    <noscript>
+      <style>.attending-extra{display:block!important;opacity:1!important;max-height:none!important}</style>
+      <p><em>{{ i18n "noscript_note" }}</em></p>
+    </noscript>
+  </form>
+</section>
+
+{{/* Load the scoped JS for this form only (no changes to site.js) */}}
+{{- $opts := dict "targetPath" "js/rsvp.js" -}}
+{{- $src := resources.Get "js/rsvp.js" | js.Build $opts | minify | fingerprint -}}
+<script src="{{ $src.RelPermalink }}" integrity="{{ $src.Data.Integrity }}" defer></script>
