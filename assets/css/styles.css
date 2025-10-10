@@ -538,3 +538,33 @@ a {
 
 .hidden { display: none; }
 
+/* === Mobile: make Canva images match the "details" section width === */
+/* Tweak only the two variables below to match your site’s paddings. */
+@media (max-width: 980px) {
+  :root {
+    /* Set this to your .wrap mobile horizontal padding (what the rest of the site uses) */
+    --wrap-pad-mobile: 1.25rem;
+
+    /* Set this to the "details" section mobile horizontal padding (the narrower one) */
+    --details-pad-mobile: 0.5rem;
+  }
+
+  /* If you use a wrapper around the image */
+  .canva-wrapper {
+    /* cancel extra side padding so it matches the details section */
+    margin-left: calc(var(--details-pad-mobile) - var(--wrap-pad-mobile));
+    margin-right: calc(var(--details-pad-mobile) - var(--wrap-pad-mobile));
+    width: calc(100% + (var(--wrap-pad-mobile) - var(--details-pad-mobile)) * 2);
+    max-width: none;
+    padding-left: 0;   /* keep padding defined by the section itself */
+    padding-right: 0;
+  }
+
+  /* If the class is on the <img> or inside the wrapper, ensure full width */
+  img.canva-image,
+  .canva-image > img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
